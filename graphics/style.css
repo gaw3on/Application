@@ -118,7 +118,9 @@ Summoner.php
  */
 
 .summoner_body {
-    color: #000;
+    background: #000 url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Diana_2.jpg") no-repeat center center fixed;
+    color: #FFF;
+    margin-top: auto;
 }
 
 .container {
@@ -137,10 +139,12 @@ Summoner.php
     padding-top: 10px;
     padding-bottom: 10px;
     border: #dee2e6 1px solid;
-}
+    -webkit-box-shadow: 1px 1px 5px 0px rgba(214,214,214,1);
+    -moz-box-shadow: 1px 1px 5px 0px rgba(214,214,214,1);
+    box-shadow: 1px 1px 5px 0px rgba(214,214,214,1);
+    background-color: #000;
+    opacity: 0.9;
 
-.table {
-    margin-top: 25px;
 }
 
 .table td {
@@ -160,7 +164,7 @@ Summoner.php
 }
 
 .positions {
-    margin-top: 45px;
+    margin-top: 30px;
     width: 75px;
     height: 75px;
 }

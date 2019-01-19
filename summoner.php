@@ -49,15 +49,6 @@
 
     $position = $api->getPosition($summoner->id);
 
-    $masteries = $api->getSummonerMasteries($summoner->id);
-
-    $masteries_first = $masteries[0];
-    $masteries_second = $masteries[1];
-    $masteries_third = $masteries[2];
-
-    $champions = $api->call_URL("http://ddragon.leagueoflegends.com/cdn/9.1.1/data/en_US/champion.json");
-    $champions = $champions['data'];
-
     foreach($position as $key => $value) {
         if($value->queueType == "RANKED_SOLO_5x5") {
             $ranked_solo = $value;
@@ -67,6 +58,15 @@
             $ranked_flex_tt = $value;
         }
     }
+
+    $masteries = $api->getSummonerMasteries($summoner->id);
+
+    $masteries_first = $masteries[0];
+    $masteries_second = $masteries[1];
+    $masteries_third = $masteries[2];
+
+    $champions = $api->call_URL("http://ddragon.leagueoflegends.com/cdn/9.1.1/data/en_US/champion.json");
+    $champions = $champions['data'];
 
     $matches = $api->getMatchList($summoner->accountId);
 
@@ -91,8 +91,6 @@
         }
     }
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -107,28 +105,14 @@
 
     <body class="summoner_body">
 
-
+    RiotApi Application / Gawron / 2019
 
     <div class="container">
 
-        <div class="row justify-content-center">
-            <div class="col-6 text-center">
-                Summoner:<br>
-                <h1><strong><u><?php echo $summoner->name . "<br>" ?></u></strong></h1>
-                Account level:
-                <strong><?php echo $summoner->summonerLevel ?></strong><br>
-                <?php echo $api->getProfileID($summoner->profileIconId) ?>
-            </div>
-
-
-        </div>
-
-
         <div class="row justify-content-around">
-            <div class="col-3 bordersilver">
-                <u>PREFERRED POSITIONS</u><br>
+            <div class="col-3 text-center bordersilver">
+                <u>PREFERRED POSITION</u><br>
                 <?php
-
                 if(array_search(max($counter), $counter) == "TOP") {
                     echo "<img class=\"positions\" src=\"graphics/positions/Top_icon.png\">";
                 } elseif(array_search(max($counter), $counter) == "JUNGLE") {
@@ -141,27 +125,53 @@
                 echo "<br>" . array_search(max($counter), $counter);
                 echo "<br>";
                 echo round(max($counter)/$matches->totalGames*100) . "% of played games<br>";
-
-                $key = (array_search(max($counter), $counter));
-                unset($counter[$key]);
-
-                if(array_search(max($counter), $counter) == "TOP") {
-                    echo "<img class=\"positions\" src=\"graphics/positions/Top_icon.png\">";
-                } elseif(array_search(max($counter), $counter) == "JUNGLE") {
-                    echo "<img class=\"positions\" src=\"graphics/positions/Jungle_icon.png\">";
-                } elseif(array_search(max($counter), $counter) == "MIDDLE") {
-                    echo "<img class=\"positions\" src=\"graphics/positions/Middle_icon.png\">";
-                } elseif(array_search(max($counter), $counter) == "BOTTOM") {
-                    echo "<img class=\"positions\" src=\"graphics/positions/Bottom_icon.png\">";
-                }
-                echo "<br>" . array_search(max($counter), $counter);
-                echo "<br>";
-                echo round(max($counter)/$matches->totalGames*100) . "% of played games";
-
                 ?>
             </div>
+            <div class="col-5 text-center bordersilver">
+                Summoner:<br>
+                <h1><strong><u><?php echo $summoner->name . "<br>" ?></u></strong></h1>
+                Account level:
+                <strong><?php echo $summoner->summonerLevel ?></strong><br>
+                <?php echo $api->getProfileID($summoner->profileIconId) ?>
+            </div>
+            <div class="col-3 text-center">
 
-            <div class="col-5">
+            </div>
+
+
+        </div>
+
+
+        <div class="row justify-content-around">
+            <div class="col-3 bordersilver">
+                <u>LAST GAMES (details TBD)</u><br>
+                <?php
+                foreach($champions as $key => $value) {
+                    if($value['key'] == $matches->matches[0]['champion']) {
+                        echo $api->getMasteryChampion($value['id']);
+                        echo "<br>Name: <strong>" . $value['id'] . "</strong><br>";
+                        echo "Requested position: " . $matches->matches[0]['lane'] . "<br>";
+                    }
+                }
+                foreach($champions as $key => $value) {
+                    if($value['key'] == $matches->matches[1]['champion']) {
+                        echo $api->getMasteryChampion($value['id']);
+                        echo "<br>Name: <strong>" . $value['id'] . "</strong><br>";
+                        echo "Requested position: " . $matches->matches[1]['lane'] . "<br>";
+                    }
+                }
+                foreach($champions as $key => $value) {
+                    if($value['key'] == $matches->matches[2]['champion']) {
+                        echo $api->getMasteryChampion($value['id']);
+                        echo "<br>Name: <strong>" . $value['id'] . "</strong><br>";
+                        echo "Requested position: " . $matches->matches[2]['lane'] . "<br>";
+                    }
+                }
+                ?>
+
+            </div>
+
+            <div class="col-5 bordersilver">
                 <table  class="table">
                     <tbody>
                     <tr>
@@ -234,14 +244,14 @@
                         if($value['key'] == $masteries_second->championId) {
                             echo $api->getMasteryChampion($value['id']);
                             echo "<br>Name: <strong>" . $value['id'] . "</strong>";
-                            echo "<br>Mastery Points: " . $masteries_first->championPoints . "<br>";
+                            echo "<br>Mastery Points: " . $masteries_second->championPoints . "<br>";
                         }
                     }
                     foreach($champions as $key => $value) {
                         if($value['key'] == $masteries_third->championId) {
                             echo $api->getMasteryChampion($value['id']);
                             echo "<br>Name: <strong>" . $value['id'] . "</strong>";
-                            echo "<br>Mastery Points: " . $masteries_first->championPoints . "<br>";
+                            echo "<br>Mastery Points: " . $masteries_third->championPoints . "<br>";
                         }
                     }
                     ?>
@@ -251,12 +261,7 @@
 
         </div>
 
-        <div class="row justify-content-center">
-            <div class="col-12 bordersilver">
-                Match info - TDB later
-            </div>
 
-        </div>
 
 
 
