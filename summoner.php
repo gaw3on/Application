@@ -148,23 +148,32 @@
                 <?php
                 foreach($champions as $key => $value) {
                     if($value['key'] == $matches->matches[0]['champion']) {
-                        echo $api->getMasteryChampion($value['id']);
-                        echo "<br>Name: <strong>" . $value['id'] . "</strong><br>";
-                        echo "Requested position: " . $matches->matches[0]['lane'] . "<br>";
+                        echo $api->getLastGameChampion($value['id']);
+                        echo "<form action=\"gamedetail.php\" method=\"GET\">";
+                        echo "<input type=\"hidden\" name=\"gameId\" value=\"" . $matches->matches[0]['gameId'] . "\"></input>";
+                        echo "<input type=\"hidden\" name=\"region\" value=\"" . $region . "\"></input>";
+                        echo "<button type=\"submit\" class=\"btn btn-primary\">Game as " . $value['name'] . "- see details!</button>";
+                        echo "</form>";
                     }
                 }
                 foreach($champions as $key => $value) {
                     if($value['key'] == $matches->matches[1]['champion']) {
-                        echo $api->getMasteryChampion($value['id']);
-                        echo "<br>Name: <strong>" . $value['id'] . "</strong><br>";
-                        echo "Requested position: " . $matches->matches[1]['lane'] . "<br>";
+                        echo $api->getLastGameChampion($value['id']);
+                        echo "<form action=\"gamedetail.php\" method=\"GET\">";
+                        echo "<input type=\"hidden\" name=\"gameId\" value=\"" . $matches->matches[1]['gameId'] . "\"></input>";
+                        echo "<input type=\"hidden\" name=\"region\" value=\"" . $region . "\"></input>";
+                        echo "<button type=\"submit\" class=\"btn btn-primary\">Game as " . $value['name'] . "- see details!</button>";
+                        echo "</form>";
                     }
                 }
                 foreach($champions as $key => $value) {
                     if($value['key'] == $matches->matches[2]['champion']) {
-                        echo $api->getMasteryChampion($value['id']);
-                        echo "<br>Name: <strong>" . $value['id'] . "</strong><br>";
-                        echo "Requested position: " . $matches->matches[2]['lane'] . "<br>";
+                        echo $api->getLastGameChampion($value['id']);
+                        echo "<form action=\"gamedetail.php\" method=\"GET\">";
+                        echo "<input type=\"hidden\" name=\"gameId\" value=\"" . $matches->matches[2]['gameId'] . "\"></input>";
+                        echo "<input type=\"hidden\" name=\"region\" value=\"" . $region . "\"></input>";
+                        echo "<button type=\"submit\" class=\"btn btn-primary\">Game as " . $value['name'] . "- see details!</button>";
+                        echo "</form>";
                     }
                 }
                 ?>
@@ -236,26 +245,25 @@
                     foreach($champions as $key => $value) {
                         if($value['key'] == $masteries_first->championId) {
                             echo $api->getMasteryChampion($value['id']);
-                            echo "<br>Name: <strong>" . $value['id'] . "</strong>";
+                            echo "<br>Name: <strong>" . $value['name'] . "</strong>";
                             echo "<br>Mastery Points: " . $masteries_first->championPoints . "<br>";
                         }
                     }
                     foreach($champions as $key => $value) {
                         if($value['key'] == $masteries_second->championId) {
                             echo $api->getMasteryChampion($value['id']);
-                            echo "<br>Name: <strong>" . $value['id'] . "</strong>";
+                            echo "<br>Name: <strong>" . $value['name'] . "</strong>";
                             echo "<br>Mastery Points: " . $masteries_second->championPoints . "<br>";
                         }
                     }
                     foreach($champions as $key => $value) {
                         if($value['key'] == $masteries_third->championId) {
                             echo $api->getMasteryChampion($value['id']);
-                            echo "<br>Name: <strong>" . $value['id'] . "</strong>";
+                            echo "<br>Name: <strong>" . $value['name'] . "</strong>";
                             echo "<br>Mastery Points: " . $masteries_third->championPoints . "<br>";
                         }
                     }
                     ?>
-
 
             </div>
 

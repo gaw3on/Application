@@ -4,6 +4,7 @@
     <list default="true" id="408fbb37-04aa-4945-8c29-f5d6d7a5a074" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/graphics/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source/RiotApi.php" beforeDir="false" afterPath="$PROJECT_DIR$/source/RiotApi.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/summoner.php" beforeDir="false" afterPath="$PROJECT_DIR$/summoner.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,11 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/summoner.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="152" column="54" selection-start-line="152" selection-start-column="54" selection-end-line="152" selection-end-column="54" />
+            <state relative-caret-position="484">
+              <caret line="170" column="69" selection-start-line="170" selection-start-column="69" selection-end-line="170" selection-end-column="69" />
               <folding>
                 <element signature="e#60#84#0#PHP" expanded="true" />
               </folding>
@@ -30,10 +31,34 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/source/RiotApi.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="61" selection-start-line="10" selection-start-column="61" selection-end-line="10" selection-end-column="61" />
+              <folding>
+                <element signature="e#31#55#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/graphics/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1830">
-              <caret line="122" column="21" selection-start-line="122" selection-start-column="21" selection-end-line="122" selection-end-column="21" />
+            <state relative-caret-position="359">
+              <caret line="164" lean-forward="true" selection-start-line="164" selection-end-line="164" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/challenger.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="348">
+              <caret line="88" column="84" selection-start-line="88" selection-start-column="34" selection-end-line="88" selection-end-column="84" />
+              <folding>
+                <element signature="e#56#80#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -85,8 +110,8 @@
         <option value="$PROJECT_DIR$/challenger.php" />
         <option value="$PROJECT_DIR$/source/Objects/MatchlistDto.php" />
         <option value="$PROJECT_DIR$/source/RiotApi.php" />
-        <option value="$PROJECT_DIR$/graphics/style.css" />
         <option value="$PROJECT_DIR$/summoner.php" />
+        <option value="$PROJECT_DIR$/graphics/style.css" />
       </list>
     </option>
   </component>
@@ -183,7 +208,7 @@
       <workItem from="1547751709683" duration="7611000" />
       <workItem from="1547836924080" duration="13480000" />
       <workItem from="1547895665744" duration="14145000" />
-      <workItem from="1547924098077" duration="2178000" />
+      <workItem from="1547924098077" duration="3868000" />
     </task>
     <task id="LOCAL-00001" summary="Commit">
       <created>1546697400403</created>
@@ -196,7 +221,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69726000" />
+    <option name="totallyTimeSpent" value="71416000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -345,13 +370,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-340">
-          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/graphics/line.png" />
     <entry file="file://$PROJECT_DIR$/source/Objects/ChampionMasteryDTO.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -374,40 +392,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/source/RiotApi.php">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3045">
-          <caret line="204" column="41" selection-start-line="204" selection-start-column="41" selection-end-line="204" selection-end-column="41" />
-          <folding>
-            <element signature="e#31#55#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="792">
+          <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/challenger.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="47" column="23" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
+        <state relative-caret-position="348">
+          <caret line="88" column="84" selection-start-line="88" selection-start-column="34" selection-end-line="88" selection-end-column="84" />
           <folding>
             <element signature="e#56#80#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/graphics/style.css">
+    <entry file="file://$PROJECT_DIR$/source/RiotApi.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1830">
-          <caret line="122" column="21" selection-start-line="122" selection-start-column="21" selection-end-line="122" selection-end-column="21" />
+        <state relative-caret-position="150">
+          <caret line="10" column="61" selection-start-line="10" selection-start-column="61" selection-end-line="10" selection-end-column="61" />
+          <folding>
+            <element signature="e#31#55#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/summoner.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="152" column="54" selection-start-line="152" selection-start-column="54" selection-end-line="152" selection-end-column="54" />
+        <state relative-caret-position="484">
+          <caret line="170" column="69" selection-start-line="170" selection-start-column="69" selection-end-line="170" selection-end-column="69" />
           <folding>
             <element signature="e#60#84#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/graphics/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="164" lean-forward="true" selection-start-line="164" selection-end-line="164" />
         </state>
       </provider>
     </entry>

@@ -8,7 +8,7 @@ use Application\Exceptions\GeneralException;
 class RiotApi
 {
     const
-        API_KEY = 'RGAPI-18404b13-085c-44bb-a084-7a79c2b90ab9';
+        API_KEY = 'RGAPI-e234456c-ace2-4a4f-8878-4c6dfe028147';
 
     private $data = array();
     protected $region;
@@ -191,6 +191,13 @@ class RiotApi
     public function getMasteryChampion (string $id){
 
         return "<img class=\"rounded-circle masteries\" src=\"http://ddragon.leagueoflegends.com/cdn/" .
+            $this->version . "/img/champion/" . $id . ".png\">";
+
+    }
+
+    public function getLastGameChampion (string $id){
+
+        return "<img class=\"rounded-circle lastgame\" src=\"http://ddragon.leagueoflegends.com/cdn/" .
             $this->version . "/img/champion/" . $id . ".png\">";
 
     }

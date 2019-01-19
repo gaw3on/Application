@@ -158,9 +158,15 @@ Summoner.php
 }
 
 .masteries {
+     margin-top: 10px;
+     width: 75px;
+     height: 75px;
+}
+
+.lastgame {
     margin-top: 10px;
-    width: 75px;
-    height: 75px;
+    width: 65px;
+    height: 65px;
 }
 
 .positions {
