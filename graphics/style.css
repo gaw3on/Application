@@ -1,0 +1,176 @@
+/**
+General
+ */
+
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-size: 10px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    color: #FFF;
+}
+
+/**
+index.html
+ */
+
+.search_body {
+    background: #000 url("http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Annie_11.jpg") no-repeat center center fixed;
+}
+
+.lol_logo {
+    height: 100px;
+    width: 260px;
+    display: block;
+    margin: -40px 0 35px 70px;
+}
+
+.container_search {
+    width: 400px;
+    height: 400px;
+    border: 1px solid #000;
+    position: fixed;
+    top: 35%;
+    left: 20%;
+    transform: translate(-35%, -20%);
+    background: #201e35; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #201e35 0%, #000000 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #201e35 0%,#000000 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #201e35 0%,#000000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#201e35', endColorstr='#000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
+}
+
+.line {
+    height: 1px;
+    width: 90%;
+    background: #FFF;
+    margin: 5px 0 10px 5%;
+}
+
+.btn-primary {
+    margin: 10px 0 10px 0;
+    border-color: #febf01;
+    background: #febf01; /* Old browsers */
+    background: -moz-linear-gradient(top, #febf01 0%, #d19202 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #febf01 0%,#d19202 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #febf01 0%,#d19202 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#febf01', endColorstr='#d19202',GradientType=0 ); /* IE6-9 */
+}
+
+.btn-primary:hover, .btn-primary:active  {
+    border-color: #d19202;
+    background: #d19202; /* Old browsers */
+    background: -moz-linear-gradient(top, #d19202 0%, #febf01 99%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #d19202 0%,#febf01 99%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #d19202 0%,#febf01 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d19202', endColorstr='#febf01',GradientType=0 ); /* IE6-9 */
+}
+
+.row {
+    margin: 15px 0 0 15px;
+    font-size: 12px;
+}
+/**
+Challenger.php
+ */
+
+.challenger_body {
+    background: #FFF;
+    color: #000;
+}
+
+.container_challenger {
+    width: 90%;
+    text-align: center;
+    margin: auto;
+    background-color: #FFF;
+}
+
+.tier_icon {
+    height: 150px;
+    width: 150px;
+    margin: 10px 0 10px 0;
+}
+
+.tier_details {
+    font-size: 20px;
+}
+
+tr:hover.summoner {
+    background-color: #778899 !important;
+    cursor: pointer;
+}
+
+/**
+Summoner.php
+ */
+
+.summoner_body {
+    color: #000;
+}
+
+.container {
+    margin-top: 10px;
+    padding: 0;
+    text-align: center;
+}
+
+.vcenter {
+    display: flex;
+    align-items: center;
+}
+
+.bordersilver {
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: #dee2e6 1px solid;
+}
+
+.table {
+    margin-top: 25px;
+}
+
+.table td {
+    border: 0px;
+}
+
+.summoner_tier_icon, .summoner_icon{
+    margin-top: 10px;
+    width: 100px;
+    height: 100px;
+}
+
+.masteries {
+    margin-top: 10px;
+    width: 75px;
+    height: 75px;
+}
+
+.positions {
+    margin-top: 45px;
+    width: 75px;
+    height: 75px;
+}
+
+
+
+
+
+
+
+
+
+
