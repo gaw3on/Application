@@ -41,29 +41,25 @@ for($i=0; $i<10; $i++) {
 ?>
 <?php
 
-$dataPoints1 = array();
-$dataPoints2 = array();
-$dataPoints3 = array();
 
-for($i=0; $i<count($goldchart[0]); $i++) {
-    $temp = array("x" => $i, "y" => $goldchart[0][$i]);
-    $dataPoints1[] = $temp;
+
+
+
+for($k=0; $k<10; $k++) {;
+    for($i=0; $i<count($goldchart[$k]); $i++) {
+        $temp = array("x" => $i, "y" => $goldchart[$k][$i]);
+        $dataPoints[$k+1][] = $temp;
+    }
 }
 
-for($i=0; $i<count($goldchart[1]); $i++) {
-    $temp = array("x" => $i, "y" => $goldchart[1][$i]);
-    $dataPoints2[] = $temp;
-}
 
-for($i=0; $i<count($goldchart[2]); $i++) {
-    $temp = array("x" => $i, "y" => $goldchart[2][$i]);
-    $dataPoints3[] = $temp;
-}
 
 
 
 
 ?>
+
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -90,20 +86,28 @@ for($i=0; $i<count($goldchart[2]); $i++) {
                 },
 
                 data: [{
-                    name: "Player 1",
+                    name: "data",
                     type: "spline",
+                    visible: false,
                     markerSize: 2,
                     toolTipContent: "{y} gold",
                     showInLegend: true,
-                    dataPoints: <?php echo json_encode($dataPoints1, JSON_NUMERIC_CHECK); ?>
+                    dataPoints: <?php echo json_encode($dataPoints[1], JSON_NUMERIC_CHECK); ?>
                 }, {
+                    name: "Player 2",
                     type: "spline",
                     markerSize: 2,
                     toolTipContent: "{y} gold",
                     showInLegend: true,
-                    dataPoints: <?php echo json_encode($dataPoints2, JSON_NUMERIC_CHECK); ?>
+                    dataPoints: <?php echo json_encode($dataPoints[2], JSON_NUMERIC_CHECK); ?>
+                }, {
+                    name: "Player 3",
+                    type: "spline",
+                    markerSize: 2,
+                    toolTipContent: "{y} gold",
+                    showInLegend: true,
+                    dataPoints: <?php echo json_encode($dataPoints[3], JSON_NUMERIC_CHECK); ?>
                 }
-
                 ]
             });
 

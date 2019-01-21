@@ -1,7 +1,9 @@
     <?php
 
     require __DIR__ .'/vendor/autoload.php';
+
     use Application\RiotApi;
+    use Application\Viewer;
     use Application\Exceptions\GeneralException;
 
     try {
@@ -19,6 +21,8 @@
     $region = $_GET['region'];
 
     $api = new RiotApi($region);
+    $viewer = new Viewer\Viewer($region);
+
     $summoner = $api->getSummoner($nick);
 
     $position = $api->getPosition($summoner->id);
@@ -59,7 +63,7 @@
             <div class="col-3 text-center bordersilver">
                 <u>PREFERRED POSITION</u><br>
                 <?php
-                echo $api->preferedposition($matches);
+                echo $viewer->preferedposition($matches);
                 ?>
             </div>
             <div class="col-5 text-center bordersilver">
@@ -67,7 +71,7 @@
                 <h1><strong><u><?php echo $summoner->name . "<br>" ?></u></strong></h1>
                 Account level:
                 <strong><?php echo $summoner->summonerLevel ?></strong><br>
-                <?php echo $api->getProfileID($summoner->profileIconId) ?>
+                <?php echo $viewer->getProfileID($summoner->profileIconId) ?>
             </div>
             <div class="col-3 text-center">
 
@@ -79,9 +83,9 @@
             <div class="col-3 bordersilver">
                 <u>LAST GAMES (details TBD)</u><br>
                 <?php
-                echo $api->game($api->champions, $matches, "0");
-                echo $api->game($api->champions, $matches, "1");
-                echo $api->game($api->champions, $matches, "2");
+                echo $viewer->game($api->champions, $matches, "0");
+                echo $viewer->game($api->champions, $matches, "1");
+                echo $viewer->game($api->champions, $matches, "2");
                 ?>
 
             </div>
@@ -92,7 +96,7 @@
                     <tr>
                         <td style="text-center" colspan="2">RANKING SOLO
                             <?php
-                            $tier1 = isset($ranked_solo) ? $api->tierdetail($ranked_solo, true) : $api->tierunranked();
+                            $tier1 = isset($ranked_solo) ? $viewer->tierdetail($ranked_solo, true) : $viewer->tierunranked();
                             echo $tier1;
                             ?>
                         </td>
@@ -100,13 +104,13 @@
                     <tr>
                         <td>RANKING FLEX (5vs5)<br>
                             <?php
-                            $tier2 = isset($ranked_flex_sr) ? $api->tierdetail($ranked_flex_sr, false) : $api->tierunranked();
+                            $tier2 = isset($ranked_flex_sr) ? $viewer->tierdetail($ranked_flex_sr, false) : $viewer->tierunranked();
                             echo $tier2;
                             ?>
                         </td>
                         <td>RANKING FLEX (3vs3)<br>
                             <?php
-                            $tier3 = isset($ranked_flex_tt) ? $api->tierdetail($ranked_flex_tt, false) : $api->tierunranked();
+                            $tier3 = isset($ranked_flex_tt) ? $viewer->tierdetail($ranked_flex_tt, false) : $viewer->tierunranked();
                             echo $tier3;
                             ?>
                         </td>
@@ -118,9 +122,9 @@
             <div class="col-3 bordersilver">
                 <u>CHAMPION MASTERIES</u><br>
                     <?php
-                    echo $api->masteries($api->champions, $masteries, "0");
-                    echo $api->masteries($api->champions, $masteries, "1");
-                    echo $api->masteries($api->champions, $masteries, "2");
+                    echo $viewer->masteries($api->champions, $masteries, "0");
+                    echo $viewer->masteries($api->champions, $masteries, "1");
+                    echo $viewer->masteries($api->champions, $masteries, "2");
                     ?>
 
             </div>

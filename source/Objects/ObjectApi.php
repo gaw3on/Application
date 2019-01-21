@@ -11,6 +11,5 @@ abstract class ObjectApi {
 		}
 	}
 
-
 }
 

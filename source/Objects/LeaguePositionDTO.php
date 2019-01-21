@@ -6,7 +6,6 @@ namespace Application\Objects;
 
 class LeaguePositionDTO extends ObjectApi
 {
-
     /** @var string $queueType */
 	public $queueType;
 	/** @var string $summonerName */

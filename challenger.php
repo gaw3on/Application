@@ -21,7 +21,7 @@
 
     $api = new RiotApi($region);
     $data = $api->challengerlist($region);
-    
+
     usort($data->entries, array('Application\RiotApi', 'sortbypoints'));
 
 
