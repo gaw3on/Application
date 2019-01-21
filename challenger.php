@@ -23,14 +23,8 @@
     $data = $api->challengerlist($region);
     $entries = $data->entries;
 
-    function cmp( $a, $b )
-    {
-        if(  $a['leaguePoints'] ==  $b['leaguePoints'] ){ return 0 ; }
-        return ($a['leaguePoints'] > $b['leaguePoints']) ? -1 : 1;
-    }
+    usort($data->entries, array('Application\RiotApi', 'sortbypoints'));
 
-    usort($entries,'cmp');
-    $data->entries = $entries;
 
 ?>
 
