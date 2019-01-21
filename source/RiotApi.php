@@ -8,7 +8,7 @@ use Application\Exceptions\GeneralException;
 class RiotApi
 {
     const
-        API_KEY = 'RGAPI-e234456c-ace2-4a4f-8878-4c6dfe028147';
+        API_KEY = 'RGAPI-42cb330b-c3f4-434d-9b06-fb8d59874f9f';
 
     private $data = array();
     protected $region;
