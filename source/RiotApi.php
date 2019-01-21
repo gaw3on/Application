@@ -46,7 +46,6 @@ class RiotApi
         $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
         $this->data = $response;
-
         $this->data = json_decode($this->data, true);
 
         $processed = $this->process_URL($httpCode);
@@ -58,12 +57,10 @@ class RiotApi
         } else {
             die(PHP_EOL . " Data processing failed!");
         }
-
     }
 
     public function process_URL(int $httpCode)
     {
-
         $processed = true;
 
         try {
@@ -107,13 +104,15 @@ class RiotApi
     }
 
     public $url;
+
     public function return_URL(string $url)
     {
         $this->url = $url;
         return $this;
     }
 
-    public $endpoint;
+    public $endpoint, $version, $method, $parameter;
+
     public function set_URL($version, $endpoint, $method, $parameter)
     {
         $this->version = $version;
@@ -125,9 +124,11 @@ class RiotApi
     }
 
     public static function sortbypoints($var1, $var2) {
-        if(  $var1['leaguePoints'] ==  $var2['leaguePoints'] ){ return 0 ; }
+        if($var1['leaguePoints'] ==  $var2['leaguePoints']){return 0 ;}
         return ($var1['leaguePoints'] > $var2['leaguePoints']) ? -1 : 1;
     }
+
+    public $line;
 
     public function preferedposition($object) {
 
@@ -168,9 +169,7 @@ class RiotApi
         $line3 = round(max($counter)/$this->object->totalGames*100) . "% of played games<br>";
 
         $line = "$line1 $line2 $line3";
-        return $line;
-
-
+        return (string) $line;
     }
 
     public function showtierlogo($tier) {
@@ -180,23 +179,23 @@ class RiotApi
         if (isset($this->tier)) {
             switch ($this->tier) {
                 case "CHALLENGER":
-                    return "<img src=\"graphics/emblems/Challenger_Emblem.png\" class=\"summoner_tier_icon\">";
+                    return (string) "<img src=\"graphics/emblems/Challenger_Emblem.png\" class=\"summoner_tier_icon\">";
                 case "GRANDMASTER":
-                    return "<img src=\"graphics/emblems/Grandmaster_Emblem.png\" class=\"summoner_tier_icon\">";
+                    return (string) "<img src=\"graphics/emblems/Grandmaster_Emblem.png\" class=\"summoner_tier_icon\">";
                 case "MASTER":
-                    return "<img src=\"graphics/emblems/Master_Emblem.png\" class=\"summoner_tier_icon\">";
+                    return (string) "<img src=\"graphics/emblems/Master_Emblem.png\" class=\"summoner_tier_icon\">";
                 case "DIAMOND":
-                    return "<img src=\"graphics/emblems/Diamond_Emblem.png\" class=\"summoner_tier_icon\">";
+                    return (string) "<img src=\"graphics/emblems/Diamond_Emblem.png\" class=\"summoner_tier_icon\">";
                 case "PLATINUM":
-                    return "<img src=\"graphics/emblems/Platinum_Emblem.png\" class=\"summoner_tier_icon\">";
+                    return (string) "<img src=\"graphics/emblems/Platinum_Emblem.png\" class=\"summoner_tier_icon\">";
                 case "GOLD":
-                    return "<img src=\"graphics/emblems/Gold_Emblem.png\" class=\"summoner_tier_icon\">";
+                    return (string) "<img src=\"graphics/emblems/Gold_Emblem.png\" class=\"summoner_tier_icon\">";
                 case "SILVER":
-                    return "<img src=\"graphics/emblems/Silver_Emblem.png\" class=\"summoner_tier_icon\">";
+                    return (string) "<img src=\"graphics/emblems/Silver_Emblem.png\" class=\"summoner_tier_icon\">";
                 case "BRONZE":
-                    return "<img src=\"graphics/emblems/Bronze_Emblem.png\" class=\"summoner_tier_icon\">";
+                    return (string) "<img src=\"graphics/emblems/Bronze_Emblem.png\" class=\"summoner_tier_icon\">";
                 case "IRON":
-                    return "<img src=\"graphics/emblems/Iron_Emblem.png\" class=\"summoner_tier_icon\">";
+                    return (string) "<img src=\"graphics/emblems/Iron_Emblem.png\" class=\"summoner_tier_icon\">";
             }
         }
     }
@@ -227,10 +226,10 @@ class RiotApi
 
             $line = "$line1 $line2";
         }
-        return $line;
+        return (string) $line;
     }
 
-    public $line;
+
 
     public function tierunranked() {
 
