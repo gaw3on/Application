@@ -332,8 +332,6 @@ class RiotApi
 
     }
 
-
-
     public function getProfileID (int $id){
 
         return "<img src=\"http://ddragon.leagueoflegends.com/cdn/"
@@ -365,9 +363,6 @@ class RiotApi
         $result = $this->call_URL($link);
         return new Objects\MatchlistDto($result);
     }
-
-
-
 }
 
 
