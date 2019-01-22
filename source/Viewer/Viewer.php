@@ -9,11 +9,17 @@ Class Viewer extends RiotApi {
     const
         DataDragon = "http://ddragon.leagueoflegends.com/cdn/",
         img_DataDragon = ".png\"",
+
         class_imgProfile = "class=\"rounded border summoner_icon\"",
         img_Profile= "/img/profileicon/",
+
         class_imgChampion = "class=\"rounded-circle lastgame\"",
         img_Champion = "/img/champion/",
-        class_imgLastGame = "class=\"rounded-circle lastgame\"";
+
+        class_imgLastGame = "class=\"rounded-circle lastgame\"",
+
+        class_LoadingChampion = "class=\"loading_champion\"",
+        img_LoadingChampion = "img/champion/loading/";
 
     public function getProfileID (int $id){
 
@@ -37,6 +43,39 @@ Class Viewer extends RiotApi {
             self::img_Champion . $id . self::img_DataDragon . self::class_imgLastGame . ">";
 
         return $result;
+
+    }
+
+    public function getLoadingChampion (int $id, string $summoner, $champions) {
+
+        foreach($champions as $key => $value) {
+            if($value['key'] == $id) {
+                $result = "<img src=\"" .  self::DataDragon . self::img_LoadingChampion . $value['id'] .
+                    "_0.jpg\" alt=\"" . $value['name'] . "\" " . self::class_LoadingChampion . ">";
+            }
+        }
+        $result .= "<br>Summoner";
+        $result .= "<br><strong><u>" . $summoner . "</u></strong>";
+
+        return $result;
+    }
+
+    public function isBlueTeam($team) {
+        if($team['teamId'] == 100) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public function teamStats($team) {
+
+        $result = "<img src=\"graphics/tower_icon.png\" class=\"stats_icon\">" . " Towers: " . $team['towerKills'];
+        $result .= " / <img src=\"graphics/dragon_icon.png\" class=\"stats_icon\">" . " Dragons: " . $team['dragonKills'];
+        $result .= " / <img src=\"graphics/baron_icon.png\" class=\"stats_icon\">" . " Barons: " . $team['baronKills'];
+
+        return (string) $result;
 
     }
 
@@ -176,20 +215,46 @@ Class Viewer extends RiotApi {
         return (string) $line;
     }
 
-    public function showgame($champions, $matches, $id, $region) {
+    public function showgame($champions, $matches, $id, $region, $summoner) {
         foreach($champions as $key => $value) {
             if($value['key'] == $matches->matches[$id]['champion']) {
                 $line1 =  $this->getLastGameChampion($value['id']);
                 $line2 =  "<form action=\"gamedetail.php\" method=\"GET\">";
                 $line3 =  "<input type=\"hidden\" name=\"gameId\" value=\"" . $matches->matches[$id]['gameId'] . "\"></input>";
-                $line4 = "<input type=\"hidden\" name=\"region\" value=\"" . $region . "\"></input>";
-                $line5 =  "<button type=\"submit\" class=\"btn btn-primary\">Game as " . $value['name'] . " - see details!</button>";
-                $line6 =  "</form>";
+                $line4 =  "<input type=\"hidden\" name=\"region\" value=\"" . $region . "\"></input>";
+                $line5 =  "<input type=\"hidden\" name=\"summoner\" value=\"" . $summoner . "\"></input>";
+                $line6 =  "<button type=\"submit\" class=\"btn btn-primary\">Game as " . $value['name'] . " - see details!</button>";
+                $line7 =  "</form>";
 
-                $line = "$line1 $line2 $line3 $line4 $line5 $line6";
+                $line = "$line1 $line2 $line3 $line4 $line5 $line6 $line7";
             }
         }
         return (string) $line;
     }
+
+    public function processGraph($player, $dataPoints, $id, $summoner, $y) {
+
+        $idd= $id+1;
+
+        $line1 = "name: \"" . $player['summonerName'][$id] . "\",";
+        $line3 = "type: \"spline\",";
+        if($player['summonerName'][$id] == $summoner) {
+            $line4 = "visible: true,";
+        } else {
+            $line4 = "visible: false,";
+        }
+        $line5 = "markerSize: 0,";
+        $line6 = "toolTipContent: \"{y} " . $y ." at {x} minute\",";
+
+        $line8 = "showInLegend: true,";
+        $line9 = "dataPoints: " . json_encode($dataPoints[$idd], JSON_NUMERIC_CHECK);
+
+        $line = "$line1 $line3 $line4 $line5 $line6 $line8 $line9";
+
+        return (string) $line;
+
+    }
+
+
 
 }

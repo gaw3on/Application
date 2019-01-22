@@ -12,6 +12,7 @@
         } elseif(!isset($_GET['region']) || $_GET['region'] == "")  {
             throw new GeneralException("Region not defined!");
         }
+
     } catch (GeneralException $exc) {
         echo $exc->getMessage();
         die();
@@ -85,9 +86,9 @@
             <div class="col-3 bordersilver">
                 <u>LAST GAMES (details TBD)</u><br>
                 <?php
-                echo $viewer->showgame($api->champions, $matches, "0", $region);
-                echo $viewer->showgame($api->champions, $matches, "1", $region);
-                echo $viewer->showgame($api->champions, $matches, "2", $region);
+                echo $viewer->showgame($api->champions, $matches, "0", $region, $summoner->name);
+                echo $viewer->showgame($api->champions, $matches, "1", $region, $summoner->name);
+                echo $viewer->showgame($api->champions, $matches, "2", $region, $summoner->name);
                 ?>
 
             </div>
@@ -96,7 +97,7 @@
                 <table  class="table">
                     <tbody>
                     <tr>
-                        <td style="text-center" colspan="2">RANKING SOLO
+                        <td style="text-center" colspan="2">RANKING SOLO<br>
                             <?php
                             $tier1 = isset($ranked_solo) ? $viewer->showtierdetail($ranked_solo, true) : $viewer->showtierunranked();
                             echo $tier1;

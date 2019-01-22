@@ -36,8 +36,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="graphics/style.css">
 
+
+
 </head>
-    <body class="challenger_body">
+    <body class="gamedetails_body">
 
     <div class="container_challenger">
         <div class="row">
@@ -54,7 +56,7 @@
 
                 <img src="graphics\emblems\Challenger_Emblem.png" class="tier_icon"/>
                 <br />
-                <table class="table text-center table-striped">
+                <table class="table text-center table-striped tablesorter" id="table">
 
                     <thead>
                     <tr>
@@ -92,6 +94,23 @@
         </div>
     </div>
 
+    <script type="text/javascript" src="//code.jquery.com/jquery-git.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://mottie.github.io/tablesorter/dist/js/jquery.tablesorter.min.js"></script>
+    <script type="text/javascript" src="https://mottie.github.io/tablesorter/js/jquery.tablesorter.widgets.js"></script>
+    <script type="text/javascript">
+        $( document ).ready(function() {
+            var $table = $('#table').tablesorter({
+                theme: 'blue',
+                widthFixed : true,
+                sortLocaleCompare: true,
+                widgets: ['zebra'],
+                sortList: [
+                    [5, 1],
+                ]
+            });
+        });
+    </script>
     </body>
 </html>
 

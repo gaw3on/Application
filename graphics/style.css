@@ -19,6 +19,62 @@ body {
     color: #FFF;
 }
 
+/*************
+  Sort Theme
+ *************/
+
+.table td,  .table th{
+    border-top: 0px;
+}
+
+.tablesorter tbody td,
+.tablesorter tfoot th,
+.tablesorter tfoot td {
+    padding: 4px;
+    vertical-align: top;
+}
+.tablesorter .header,
+.tablesorter .tablesorter-header {
+    /* black (unsorted) double arrow */
+    background-image: url(data:image/gif;base64,R0lGODlhFQAJAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAkAAAIXjI+AywnaYnhUMoqt3gZXPmVg94yJVQAAOw==);
+    /* white (unsorted) double arrow */
+    /* background-image: url(data:image/gif;base64,R0lGODlhFQAJAIAAAP///////yH5BAEAAAEALAAAAAAVAAkAAAIXjI+AywnaYnhUMoqt3gZXPmVg94yJVQAAOw==); */
+    /* image */
+    /* background-image: url(images/black-unsorted.gif); */
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding: 4px 18px 4px 4px;
+    white-space: normal;
+    cursor: pointer;
+}
+.tablesorter .headerSortUp,
+.tablesorter .tablesorter-headerSortUp,
+.tablesorter .tablesorter-headerAsc {
+
+    /* black asc arrow */
+    background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAQAAAINjI8Bya2wnINUMopZAQA7);
+    /* white asc arrow */
+    /* background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAAP///////yH5BAEAAAEALAAAAAAVAAQAAAINjI8Bya2wnINUMopZAQA7); */
+    /* image */
+    /* background-image: url(images/black-asc.gif); */
+}
+.tablesorter .headerSortDown,
+.tablesorter .tablesorter-headerSortDown,
+.tablesorter .tablesorter-headerDesc {
+
+    /* black desc arrow */
+    background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAQAAAINjB+gC+jP2ptn0WskLQA7);
+    /* white desc arrow */
+    /* background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAAP///////yH5BAEAAAEALAAAAAAVAAQAAAINjB+gC+jP2ptn0WskLQA7); */
+    /* image */
+    /* background-image: url(images/black-desc.gif); */
+}
+.tablesorter thead .sorter-false {
+    background-image: none;
+    cursor: default;
+    padding: 4px;
+}
+
 /**
 index.html
  */
@@ -175,15 +231,58 @@ Summoner.php
     height: 75px;
 }
 
-.test {
-    opacity: 0.5;
+/**
+gamedetail.php
+ */
+
+.gamedetails_body {
+    background: #FFF;
+    color: #000;
 }
 
+.container_gamedetails {
+    width: 90%;
+    text-align: center;
+    margin: auto;
+    background-color: #FFF;
+    margin-top: 10px;
+}
 
+.loading_champion {
+    width: 150px;
+    height: 250px;
+    margin-bottom: 5px;
+}
 
+.blueteam {
+    background-color: #5d9cd3;
+}
 
+.redteam {
+    background-color: #f45b69;
 
+}
 
+span.left {
+    float: left;
+    font-weight: bold;
+}
 
+span.right {
+    float: right;
+}
 
+.stats_icon {
+    width: 20px;
+    height: 20px;
+}
+
+.title {
+    width: 100%;
+    height: 25px;
+    background-color: #d3d3d3;
+    margin: 10px 0 10px 0;
+    line-height: 25px;
+    white-space: nowrap;
+}
 
