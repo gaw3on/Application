@@ -15,10 +15,8 @@ class RiotApi
     public $game_version;
     public $champions;
 
-    public function __construct($region)
+    public function __construct()
     {
-        $this->region = $region;
-
         $this->game_version = $this->call_URL("https://ddragon.leagueoflegends.com/api/versions.json");
         $this->game_version = $this->game_version[0];
 
@@ -27,8 +25,14 @@ class RiotApi
         $this->champions = $this->champions['data'];
     }
 
-    public function call_URL(string $url)
-    {
+    public function setregion($region) {
+
+        $this->region = $region;
+        return $this->region;
+
+    }
+
+    public function call_URL(string $url) {
 
         $curl = curl_init();
 
@@ -130,24 +134,29 @@ class RiotApi
     const ENDPOINT_SUMMONER = '.api.riotgames.com/lol/summoner';
     const METHOD_SUMMONER = 'summoners/by-name/';
 
-    public function getSummoner(string $name)
+    public function getSummoner(string $summonerName)
     {
-        $name = str_replace(' ', '%20', $name);
-        $link = $this->set_URL(self::VERSION_APP, self:: ENDPOINT_SUMMONER, self:: METHOD_SUMMONER, $name);
-        $result = $this->call_URL($link);
+        $summonerName = str_replace(' ', '%20', $summonerName);
+        $access = $this->set_URL(self::VERSION_APP, self:: ENDPOINT_SUMMONER, self:: METHOD_SUMMONER, $summonerName);
+        $result = $this->call_URL($access);
 
         return new Objects\SummonerDTO($result);
     }
 
+    /**
+     * @param $id
+     * @return Objects/LeaguePositionDTO
+     * /lol/summoner/v4/positions/by-summoner/{id}
+     */
 
     const ENDPOINT_LEAUGE = '.api.riotgames.com/lol/league';
     const METHOD_LEAUGE = 'positions/by-summoner/';
 
     public function getPosition(string $id)
     {
-        $link = $this->set_URL(self::VERSION_APP, self:: ENDPOINT_LEAUGE, self:: METHOD_LEAUGE, $id);
+        $access = $this->set_URL(self::VERSION_APP, self:: ENDPOINT_LEAUGE, self:: METHOD_LEAUGE, $id);
+        $result = $this->call_URL($access);
 
-        $result = $this->call_URL($link);
         $results = [];
         foreach ($result as $object)
             $results[] = new Objects\LeaguePositionDTO($object);
@@ -156,23 +165,35 @@ class RiotApi
 
     }
 
+    /**
+     * @param
+     * @return Objects/LeagueListDTO
+     * /lol/league/v4/challengerleagues/by-queue/RANKED_SOLO_5x5
+     */
+
     public function challengerlist()
     {
-        $link = "https://" . $this->region . ".api.riotgames.com/lol/league/v4/challengerleagues/by-queue/RANKED_SOLO_5x5";
+        $access = "https://" . $this->region . ".api.riotgames.com/lol/league/v4/challengerleagues/by-queue/RANKED_SOLO_5x5";
+        $result = $this->call_URL($access);
 
-        $result = $this->call_URL($link);
         return new Objects\LeagueListDTO($result);
 
     }
+
+    /**
+     * @param $id
+     * @return Objects/ChampionMasteryDTO
+     * /lol/champion-mastery/v4/champion-masteries/by-summoner/{id}
+     */
 
     const ENDPOINT_MASTERIES = '.api.riotgames.com/lol/champion-mastery';
     const METHOD_MASTERIES= 'champion-masteries/by-summoner/';
 
     public function getSummonerMasteries(string $id) {
 
-        $link = $this->set_URL(self::VERSION_APP, self:: ENDPOINT_MASTERIES, self:: METHOD_MASTERIES, $id);
+        $access = $this->set_URL(self::VERSION_APP, self:: ENDPOINT_MASTERIES, self:: METHOD_MASTERIES, $id);
 
-        $result = $this->call_URL($link);
+        $result = $this->call_URL($access);
         $results = [];
         foreach ($result as $object)
             $results[] = new Objects\ChampionMasteryDTO($object);
@@ -181,15 +202,56 @@ class RiotApi
 
     }
 
+    /**
+     * @param $id
+     * @return Objects/MatchlistDto
+     * /lol/match/v4/matchlists/by-account/{id}
+     */
+
     const ENDPOINT_MATCHES = '.api.riotgames.com/lol/match';
     const METHOD_MATCHES= 'matchlists/by-account/';
 
     public function getMatchList (string $id) {
 
-        $link = $this->set_URL(self::VERSION_APP, self:: ENDPOINT_MATCHES, self:: METHOD_MATCHES, $id);
+        $access = $this->set_URL(self::VERSION_APP, self:: ENDPOINT_MATCHES, self:: METHOD_MATCHES, $id);
 
-        $result = $this->call_URL($link);
+        $result = $this->call_URL($access);
         return new Objects\MatchlistDto($result);
+    }
+
+    /**
+     * @param $id
+     * @return Objects/MatchDto
+     * /lol/match/v4/matches/{id}
+     */
+
+    const ENDPOINT_MATCHES_DETAIL = '.api.riotgames.com/lol/match';
+    const METHOD_MATCHES_DETAIL = 'matches/';
+
+    public function getMatchDetail (string $id) {
+
+        $access = $this->set_URL(self::VERSION_APP, self:: ENDPOINT_MATCHES_DETAIL, self:: METHOD_MATCHES_DETAIL, $id);
+
+        $result = $this->call_URL($access);
+        return new Objects\MatchDto($result);
+    }
+
+    /**
+     * @param $id
+     * @return Objects/MatchTimelineDto
+     * /lol/match/v4/matches/{id}
+     */
+
+
+    const ENDPOINT_MATCHES_TIMELINE = '.api.riotgames.com/lol/match';
+    const METHOD_MATCHES_TIMELINE = 'timelines/by-match/';
+
+    public function getMatchTimeline (string $id) {
+
+        $access = $this->set_URL(self::VERSION_APP, self:: ENDPOINT_MATCHES_TIMELINE, self:: METHOD_MATCHES_TIMELINE, $id);
+
+        $result = $this->call_URL($access);
+        return new Objects\MatchTimelineDto($result);
     }
 }
 

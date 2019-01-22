@@ -20,8 +20,10 @@
     $nick = $_GET['summoner'];
     $region = $_GET['region'];
 
-    $api = new RiotApi($region);
-    $viewer = new Viewer\Viewer($region);
+    $api = new RiotApi();
+    $api->setregion($region);
+
+    $viewer = new Viewer\Viewer();
 
     $summoner = $api->getSummoner($nick);
 
@@ -83,9 +85,9 @@
             <div class="col-3 bordersilver">
                 <u>LAST GAMES (details TBD)</u><br>
                 <?php
-                echo $viewer->game($api->champions, $matches, "0");
-                echo $viewer->game($api->champions, $matches, "1");
-                echo $viewer->game($api->champions, $matches, "2");
+                echo $viewer->showgame($api->champions, $matches, "0", $region);
+                echo $viewer->showgame($api->champions, $matches, "1", $region);
+                echo $viewer->showgame($api->champions, $matches, "2", $region);
                 ?>
 
             </div>
@@ -96,7 +98,7 @@
                     <tr>
                         <td style="text-center" colspan="2">RANKING SOLO
                             <?php
-                            $tier1 = isset($ranked_solo) ? $viewer->tierdetail($ranked_solo, true) : $viewer->tierunranked();
+                            $tier1 = isset($ranked_solo) ? $viewer->showtierdetail($ranked_solo, true) : $viewer->showtierunranked();
                             echo $tier1;
                             ?>
                         </td>
@@ -104,13 +106,13 @@
                     <tr>
                         <td>RANKING FLEX (5vs5)<br>
                             <?php
-                            $tier2 = isset($ranked_flex_sr) ? $viewer->tierdetail($ranked_flex_sr, false) : $viewer->tierunranked();
+                            $tier2 = isset($ranked_flex_sr) ? $viewer->showtierdetail($ranked_flex_sr, false) : $viewer->showtierunranked();
                             echo $tier2;
                             ?>
                         </td>
                         <td>RANKING FLEX (3vs3)<br>
                             <?php
-                            $tier3 = isset($ranked_flex_tt) ? $viewer->tierdetail($ranked_flex_tt, false) : $viewer->tierunranked();
+                            $tier3 = isset($ranked_flex_tt) ? $viewer->showtierdetail($ranked_flex_tt, false) : $viewer->showtierunranked();
                             echo $tier3;
                             ?>
                         </td>
@@ -122,9 +124,9 @@
             <div class="col-3 bordersilver">
                 <u>CHAMPION MASTERIES</u><br>
                     <?php
-                    echo $viewer->masteries($api->champions, $masteries, "0");
-                    echo $viewer->masteries($api->champions, $masteries, "1");
-                    echo $viewer->masteries($api->champions, $masteries, "2");
+                    echo $viewer->showmasteries($api->champions, $masteries, "0");
+                    echo $viewer->showmasteries($api->champions, $masteries, "1");
+                    echo $viewer->showmasteries($api->champions, $masteries, "2");
                     ?>
 
             </div>

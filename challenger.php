@@ -2,11 +2,8 @@
 
     require __DIR__ .'/vendor/autoload.php';
     use Application\RiotApi;
+    use Application\Viewer;
     use Application\Exceptions\GeneralException;
-
-    /**
-     *  Get Challenger Player list (by region) and sort it (by points);
-     */
 
     try {
         if(!isset($_GET['region']) || $_GET['region'] == "") {
@@ -19,8 +16,12 @@
 
     $region = $_GET['region'];
 
-    $api = new RiotApi($region);
-    $data = $api->challengerlist($region);
+    $api = new RiotApi();
+    $api->setregion($region);
+
+    $viewer = new Viewer\Viewer();
+
+    $data = $api->challengerlist();
 
     usort($data->entries, array('Application\RiotApi', 'sortbypoints'));
 
@@ -44,15 +45,7 @@
                 <p class="tier_details"><?php echo $data->tier ?>
                     <br />
                     <?php
-                    if($region == "eun1") {
-                        echo "<strong>Europe Nordic and East</strong>";
-                    } elseif($region == "euw1") {
-                        echo "<strong>Europe West</strong>";
-                    } elseif($region == "na1") {
-                        echo "<strong>North America</strong>";
-                    } else {
-                        return false;
-                    }
+                    echo $viewer->fullNameRegion($region);
                     ?>
                     <p>League name: <i><u><?php echo $data->name ?></u></i>
                     <br><?php echo date("F j, Y, g:i a") ?>

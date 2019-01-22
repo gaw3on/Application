@@ -6,25 +6,48 @@ use Application\RiotApi;
 
 Class Viewer extends RiotApi {
 
+    const
+        DataDragon = "http://ddragon.leagueoflegends.com/cdn/",
+        img_DataDragon = ".png\"",
+        class_imgProfile = "class=\"rounded border summoner_icon\"",
+        img_Profile= "/img/profileicon/",
+        class_imgChampion = "class=\"rounded-circle lastgame\"",
+        img_Champion = "/img/champion/",
+        class_imgLastGame = "class=\"rounded-circle lastgame\"";
+
     public function getProfileID (int $id){
 
-        return "<img src=\"http://ddragon.leagueoflegends.com/cdn/"
-            . $this->game_version . "/img/profileicon/" . $id . ".png\" class=\"rounded border summoner_icon\">";
+        $result = "<img src=\"" .  self::DataDragon . $this->game_version .
+            self::img_Profile . $id . self::img_DataDragon . self::class_imgProfile . ">";
 
+        return $result;
     }
 
     public function getMasteryChampion (string $id){
 
-        return "<img class=\"rounded-circle masteries\" src=\"http://ddragon.leagueoflegends.com/cdn/" .
-            $this->game_version . "/img/champion/" . $id . ".png\">";
+        $result = "<img src=\"" .  self::DataDragon . $this->game_version .
+            self::img_Champion . $id . self::img_DataDragon . self::class_imgChampion . ">";
 
+        return $result;
     }
 
     public function getLastGameChampion (string $id){
 
-        return "<img class=\"rounded-circle lastgame\" src=\"http://ddragon.leagueoflegends.com/cdn/" .
-            $this->game_version . "/img/champion/" . $id . ".png\">";
+        $result = "<img src=\"" .  self::DataDragon . $this->game_version .
+            self::img_Champion . $id . self::img_DataDragon . self::class_imgLastGame . ">";
 
+        return $result;
+
+    }
+
+    public function fullNameRegion ($region) {
+        if($region == "eun1") {
+            return "<strong>Europe Nordic and East</strong>";
+        } elseif($region == "euw1") {
+            return "<strong>Europe West</strong>";
+        } elseif($region == "na1") {
+            return "<strong>North America</strong>";
+        }
     }
 
     public $line;
@@ -99,7 +122,7 @@ Class Viewer extends RiotApi {
         }
     }
 
-    public function tierdetail($ranking, $long) {
+    public function showtierdetail($ranking, $long) {
 
         $this->ranking = $ranking;
 
@@ -130,7 +153,7 @@ Class Viewer extends RiotApi {
 
 
 
-    public function tierunranked() {
+    public function showtierunranked() {
 
         $line1 =  "Unranked" . "<br>";
         $line2 =  "<img src=\"graphics/emblems/Unranked_Emblem.png\" class=\"summoner_tier_icon\"><br>";
@@ -140,7 +163,7 @@ Class Viewer extends RiotApi {
         return (string) $line;
     }
 
-    public function masteries($champions, $masteries, $id) {
+    public function showmasteries($champions, $masteries, $id) {
         foreach($champions as $key => $value) {
             if($value['key'] == $masteries[$id]->championId) {
                 $line1 =  $this->getMasteryChampion($value['id']);
@@ -153,14 +176,14 @@ Class Viewer extends RiotApi {
         return (string) $line;
     }
 
-    public function game($champions, $matches, $id) {
+    public function showgame($champions, $matches, $id, $region) {
         foreach($champions as $key => $value) {
             if($value['key'] == $matches->matches[$id]['champion']) {
                 $line1 =  $this->getLastGameChampion($value['id']);
                 $line2 =  "<form action=\"gamedetail.php\" method=\"GET\">";
                 $line3 =  "<input type=\"hidden\" name=\"gameId\" value=\"" . $matches->matches[$id]['gameId'] . "\"></input>";
-                $line4 = "<input type=\"hidden\" name=\"region\" value=\"" . $this->region . "\"></input>";
-                $line5 =  "<button type=\"submit\" class=\"btn btn-primary\">Game as " . $value['name'] . "- see details!</button>";
+                $line4 = "<input type=\"hidden\" name=\"region\" value=\"" . $region . "\"></input>";
+                $line5 =  "<button type=\"submit\" class=\"btn btn-primary\">Game as " . $value['name'] . " - see details!</button>";
                 $line6 =  "</form>";
 
                 $line = "$line1 $line2 $line3 $line4 $line5 $line6";

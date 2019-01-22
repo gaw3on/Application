@@ -2,6 +2,7 @@
 
 require __DIR__ .'/vendor/autoload.php';
 use Application\RiotApi;
+use Application\Viewer;
 use Application\Exceptions\GeneralException;
 
 try {
@@ -17,28 +18,35 @@ try {
 
 /** @var team blue 100, red 200  */
 
-$getmatch = json_decode(file_get_contents("getmatch.json"), true);
+$region = $_GET['region'];
+$gameId = $_GET['gameId'];
 
-echo "<br>";
-$gettimeline = json_decode(file_get_contents("getmatchtimeline.json"), true);
+$api = new RiotApi();
+$viewer = new Viewer\Viewer();
 
-foreach($getmatch['participantIdentities'] as $key => $value) {
+$api->setregion($region);
+
+$getmatch = $api->getMatchDetail($gameId);
+
+$gettimeline = $api->getMatchTimeline($gameId);
+
+foreach($getmatch->participantIdentities as $key => $value) {
     $player['summonerName'][$key] = $value['player']['summonerName'];
 }
 
-foreach($getmatch['participants'] as $key => $value) {
+foreach($getmatch->participants as $key => $value) {
     $player['details'][$key] = $value;
 }
 
 
-
 for($i=0; $i<10; $i++) {
-    for($j=0; $j<sizeof($gettimeline['frames']); $j++) {
-        $goldchart[$i][$j] = $gettimeline['frames'][$j]['participantFrames'][$i+1]['totalGold'];
+    for($j=0; $j<sizeof($gettimeline->frames); $j++) {
+        $goldchart[$i][$j] = $gettimeline->frames[$j]['participantFrames'][$i+1]['totalGold'];
     }
 }
 
 ?>
+
 <?php
 
 
@@ -64,6 +72,8 @@ for($k=0; $k<10; $k++) {;
 <html>
 <head>
     <meta charset="UTF-8">
+
+
     <script>
         window.onload = function () {
 
@@ -73,7 +83,7 @@ for($k=0; $k<10; $k++) {;
                     text: "Player gold difference in time"
                 },
                 axisX: {
-                    title: "Frames",
+                    title: "Game time (minutes)",
                 },
 
                 axisY: {
@@ -86,22 +96,22 @@ for($k=0; $k<10; $k++) {;
                 },
 
                 data: [{
-                    name: "data",
+                    name: "<?php echo $player['summonerName'][0] ?>",
                     type: "spline",
                     visible: false,
                     markerSize: 2,
-                    toolTipContent: "{y} gold",
+                    toolTipContent: "{y} gold at {x} minute",
                     showInLegend: true,
                     dataPoints: <?php echo json_encode($dataPoints[1], JSON_NUMERIC_CHECK); ?>
                 }, {
-                    name: "Player 2",
+                    name: "<?php echo $player['summonerName'][1] ?>",
                     type: "spline",
                     markerSize: 2,
                     toolTipContent: "{y} gold",
                     showInLegend: true,
                     dataPoints: <?php echo json_encode($dataPoints[2], JSON_NUMERIC_CHECK); ?>
                 }, {
-                    name: "Player 3",
+                    name: "<?php echo $player['summonerName'][2] ?>",
                     type: "spline",
                     markerSize: 2,
                     toolTipContent: "{y} gold",
@@ -126,10 +136,13 @@ for($k=0; $k<10; $k++) {;
         }
 
 
+
+
     </script>
 </head>
 <body>
 <div id="chartContainer" style="height: 370px; width: 60%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
 </body>
 </html>
