@@ -8,7 +8,7 @@ use Application\Exceptions\GeneralException;
 class RiotApi
 {
     const
-        API_KEY = 'RGAPI-5a775450-e3ff-400d-8ca5-2fbb0aad712a';
+        API_KEY = 'RGAPI-272d6882-10e6-4ace-b3ff-acfa2311edf0';
 
     private $data = array();
     protected $region;
@@ -174,6 +174,22 @@ class RiotApi
     public function challengerlist()
     {
         $access = "https://" . $this->region . ".api.riotgames.com/lol/league/v4/challengerleagues/by-queue/RANKED_SOLO_5x5";
+        $result = $this->call_URL($access);
+
+        return new Objects\LeagueListDTO($result);
+
+    }
+
+    /**
+     * @param
+     * @return Objects/LeagueListDTO
+     * /lol/league/v4/masterleagues/by-queue/RANKED_SOLO_5x5
+     */
+
+    public function masterlist()
+    {
+
+        $access = "https://" . $this->region . ".api.riotgames.com/lol/league/v4/masterleagues/by-queue/RANKED_SOLO_5x5";
         $result = $this->call_URL($access);
 
         return new Objects\LeagueListDTO($result);

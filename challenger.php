@@ -23,6 +23,10 @@
 
     $data = $api->challengerlist();
 
+    if(empty($data->name)) {
+        $data = $api->masterlist();
+    }
+
     usort($data->entries, array('Application\RiotApi', 'sortbypoints'));
 
 
@@ -53,8 +57,14 @@
                     <br><?php echo date("F j, Y, g:i a") ?>
                     </p>
                 </p>
+                <?php
+                if($data->tier == "CHALLENGER") {
+                    echo "<img src=\"graphics/emblems/Challenger_Emblem.png\" class=\"tier_icon\"/>";
+                } elseif ($data->tier == "MASTER") {
+                    echo "<img src=\"graphics/emblems/Master_Emblem.png\" class=\"tier_icon\"/>";
+                }
+                ?>
 
-                <img src="graphics\emblems\Challenger_Emblem.png" class="tier_icon"/>
                 <br />
                 <table class="table text-center table-striped tablesorter" id="table">
 

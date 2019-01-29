@@ -11,7 +11,7 @@ try {
     } elseif(!isset($_GET['region']) || $_GET['region'] == "")  {
         throw new GeneralException("Region not defined!");
     } elseif(!isset($_GET['summoner']) || $_GET['summoner'] == "")  {
-        throw new GeneralException("Region not defined!");
+        throw new GeneralException("Summoner not defined!");
     }
 } catch (GeneralException $exc) {
     echo $exc->getMessage();
@@ -42,6 +42,7 @@ foreach($getmatch->participants as $key => $value) {
     $players_data['championId'][$key] = $value['championId'];
     $players_data['stats'][$key] = $value['stats'];
 }
+
 
 /**
  Gold chart
@@ -84,6 +85,7 @@ for($k=0; $k<10; $k++) {;
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="graphics/style.css">
     <script type="text/javascript" src="//code.jquery.com/jquery-git.js"></script>
+    <title>Game details</title>
 
     <script>
 
@@ -174,7 +176,7 @@ for($k=0; $k<10; $k++) {;
             }
         }
     </script>
-    
+
 </head>
 <body class="challenger_body">
 <div class="container_gamedetails">
@@ -193,7 +195,7 @@ for($k=0; $k<10; $k++) {;
         <td colspan="5" class="<?php echo $var = $viewer->isBlueTeam($team_1) ? "blueteam" : "redteam" ?>">
             <span class="left"><img src="graphics/team_icon.png" class="stats_icon"> Team 1 /
             <?php echo $var = $viewer->isBlueTeam($team_1) ? "Blue team / " : "Red team / " ?>
-            <?php echo $var = ($team_1['win'] == "Win") ? "WIN" : "LOOSE" ?>
+            <?php echo $var = ($team_1['win'] == "Win") ? "WIN" : "LOST" ?>
             </span>
             <span class="right">
                 <?php echo $viewer->teamStats($team_1) ?>
@@ -207,7 +209,7 @@ for($k=0; $k<10; $k++) {;
         <td colspan="5" class="<?php echo $var = $viewer->isBlueTeam($team_2) ? "blueteam" : "redteam" ?>">
             <span class="left"><img src="graphics/team_icon.png" class="stats_icon"> Team 2 /
             <?php echo $var = $viewer->isBlueTeam($team_2) ? "Blue team / " : "Red team / " ?>
-                <?php echo $var = ($team_2['win'] == "Win") ? "WIN" : "LOOSE" ?>
+                <?php echo $var = ($team_2['win'] == "Win") ? "WIN" : "LOST" ?>
             </span>
             <span class="right">
                 <?php echo $viewer->teamStats($team_2) ?>
@@ -222,7 +224,6 @@ for($k=0; $k<10; $k++) {;
             echo "</td>";
             }
         ?></tr>
-
 </table>
     <div class="title">FINAL BUILD</div>
     <div class="title">STATISTICS</div>
